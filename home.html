@@ -1,12 +1,146 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Home</title>
+<meta charset="UTF-8">
+<title>Bio-Pay</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
-<body style="text-align:center; margin-top:100px; font-family:sans-serif;">
 
-<h1>Welcome to Bio-Pay</h1>
-<p>Login Successful</p>
+<body>
 
+<!-- HEADER -->
+<header class="header">
+ <div class="logo">
+  <div class="logo-b">B</div>
+  <span>Bio-Pay</span>
+</div>
+
+  <nav>
+    <a class="active">Dashboard</a>
+    <a>Help</a>
+    <a>Contact</a>
+  </nav>
+
+  <div class="right">
+    <i class="ri-notification-3-line"></i>
+    <div class="profile" onclick="toggleMenu()">K</div>
+
+    <div id="menu" class="menu">
+      <div>Profile</div>
+      <div>Settings</div>
+      <div>Logout</div>
+    </div>
+  </div>
+</header>
+
+<!-- TOP -->
+<section class="top">
+  <div>
+    <h1>Good morning, Kris</h1>
+    <p>Your biometric vault is secure.</p>
+  </div>
+  <div class="status">● Active • India</div>
+</section>
+
+<!-- GRID -->
+<section class="grid">
+
+  <!-- BALANCE CARD -->
+ <div class="balance">
+  <p>AVAILABLE LIQUIDITY</p>
+
+  <div class="balance-row">
+    <h1 id="balance">••••••</h1>
+    <i class="ri-eye-line eye" onclick="openBiometric()"></i>
+  </div>
+
+  <div class="balance-bottom">
+    <span class="tag">Encrypted via Bio-Signature</span>
+    <small>BIOMETRIC AUTH REQUIRED</small>
+  </div>
+</div>
+  <!-- BIO READY -->
+  <div class="bio">
+    <div class="icon-box">
+      <i class="ri-fingerprint-line"></i>
+    </div>
+
+    <h3>Bio-Ready</h3>
+    <p>Execute borderless payments with a single biometric touch.</p>
+
+    <button>SETTINGS & DEVICES</button>
+  </div>
+
+</section>
+
+<!-- ACTION CARDS -->
+<section class="actions">
+
+  <div class="action active-card" onclick="openBiometric()">
+    <i class="ri-bank-line"></i>
+    <p>Check Balance</p>
+  </div>
+
+  <div class="action">
+    <i class="ri-smartphone-line"></i>
+    <p>Pay Mobile</p>
+  </div>
+
+  <div class="action">
+    <i class="ri-qr-scan-2-line"></i>
+    <p>Scan to Pay</p>
+  </div>
+
+  <div class="action">
+    <i class="ri-qr-code-line"></i>
+    <p>Receive QR</p>
+  </div>
+
+</section>
+
+<!-- ACTIVITY -->
+<section class="activity">
+  <h3>Activity Stream</h3>
+
+  <div class="txn">
+    <span>Apple Store</span>
+    <span class="red">-₹1,299</span>
+  </div>
+
+  <div class="txn">
+    <span>Received from James</span>
+    <span class="green">+₹450</span>
+  </div>
+</section>
+
+<!-- PROMO -->
+<section class="promo">
+  <div>
+    <h1>Instant settlements.<br>Infinite security.</h1>
+    <p>Secure biometric payments for future.</p>
+    <button>EXPAND MY NETWORK</button>
+  </div>
+</section>
+
+<!-- BIOMETRIC POPUP -->
+<div id="bio-popup" class="popup">
+  <div class="popup-box">
+
+    <div class="fingerprint-ring">
+      <div class="fingerprint"></div>
+    </div>
+
+    <h2>Biometric Scan</h2>
+    <p>Place your finger to decrypt your balance</p>
+
+    <button onclick="authenticate()">AUTHENTICATE</button>
+    <span onclick="closePopup()">Cancel Request</span>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
