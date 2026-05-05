@@ -75,96 +75,98 @@ function logout() {
   alert("Logged out");
   window.location.href = "index.html";
 }
+
 // ===============================
-// PROFILE MENU TOGGLE
+// ACTIVE CARD SWITCH
 // ===============================
-function toggleMenu() {
-  const menu = document.getElementById("menu");
+document.addEventListener("DOMContentLoaded", () => {
+  const actions = document.querySelectorAll(".action");
 
-  if (menu.style.display === "block") {
-    menu.style.display = "none";
-  } else {
-    menu.style.display = "block";
-  }
-}
-
-// Close menu when clicking outside
-document.addEventListener("click", function (e) {
-  const menu = document.getElementById("menu");
-  const profile = document.querySelector(".profile");
-
-  if (menu && !profile.contains(e.target) && !menu.contains(e.target)) {
-    menu.style.display = "none";
-  }
+  actions.forEach((card) => {
+    card.addEventListener("click", () => {
+      actions.forEach(c => c.classList.remove("active-card"));
+      card.classList.add("active-card");
+    });
+  });
 });
+let balanceVisible = false;
 
-
-// ===============================
-// BIOMETRIC POPUP CONTROL
-// ===============================
-function openBiometric() {
-  const popup = document.getElementById("bio-popup");
-  popup.style.display = "block";
-}
-
-function closePopup() {
-  const popup = document.getElementById("bio-popup");
-  popup.style.display = "none";
-}
-
-
-// ===============================
-// BIOMETRIC AUTHENTICATION FLOW
-// ===============================
-function authenticate() {
-  const fingerprint = document.querySelector(".fingerprint");
-  const popupText = document.querySelector(".popup-box p");
-
-  // Step 1: scanning effect
-  popupText.innerText = "Scanning fingerprint...";
-  fingerprint.style.animation = "pulse 0.6s infinite";
-
-  // Step 2: simulate scan delay
-  setTimeout(() => {
-    popupText.innerText = "Verifying biometric data...";
-
-    setTimeout(() => {
-      popupText.innerText = "Access Granted ✔";
-
-      // Step 3: stop animation
-      fingerprint.style.animation = "none";
-
-      // Step 4: close popup + show balance
-      setTimeout(() => {
-        closePopup();
-        showBalance();
-      }, 800);
-
-    }, 1000);
-
-  }, 1200);
-}
-
-
-// ===============================
-// BALANCE CONTROL
-// ===============================
-let isVisible = false;
-
-function showBalance() {
+function toggleBalance() {
   const balance = document.getElementById("balance");
+  const eye = document.querySelector(".eye");
 
-  balance.innerText = "₹12,500"; // you can make dynamic later
-  isVisible = true;
+  if (!balanceVisible) {
+    // show real balance
+    balance.innerText = balance.getAttribute("data-real");
+    eye.className = "ri-eye-off-line eye";
+    balanceVisible = true;
+  } else {
+    // show PIN dots
+    balance.innerText = "● ● ● ● ● ●";
+    eye.className = "ri-eye-line eye";
+    balanceVisible = false;
+  }
+}
+// ===============================
+// OPEN PIN POPUP
+// ===============================
+function openPinPopup() {
+  document.getElementById("pinPopup").style.display = "block";
 }
 
+// ===============================
+// PIN BALANCE CONTROL
+// ===============================
+let isUnlocked = false;
 
-// ===============================
-// OPTIONAL: HIDE AGAIN (IF NEEDED)
-// ===============================
-function hideBalance() {
+function toggleBalancePin() {
+  if (!isUnlocked) {
+    openPinPopup();
+  } else {
+    hideBalancePin();
+  }
+}
+
+function checkPin() {
+  const pin = document.getElementById("pinInput").value;
   const balance = document.getElementById("balance");
+  const eye = document.querySelector(".eye");
 
-  balance.innerText = "••••••";
-  isVisible = false;
+  if (pin === "1234") {
+    balance.innerText = "₹12,500";
+    eye.className = "ri-eye-off-line eye";
+
+    isUnlocked = true;
+
+    document.getElementById("pinPopup").style.display = "none";
+  } else {
+    alert("Wrong PIN ❌");
+  }
 }
+
+function hideBalancePin() {
+  const balance = document.getElementById("balance");
+  const eye = document.querySelector(".eye");
+
+  balance.innerText = "● ● ● ● ● ●";
+  eye.className = "ri-eye-line eye";
+
+  isUnlocked = false;
+}
+
+function openPinPopup() {
+  const popup = document.getElementById("pinPopup");
+  popup.style.display = "flex";   // 🔥 important
+}
+window.onload = () => {
+  const balance = document.getElementById("balance");
+  const eye = document.querySelector(".eye");
+
+  if (balance && eye) {
+    // always start hidden
+    balance.innerText = "● ● ● ● ● ●";
+    eye.className = "ri-eye-line eye";
+  }
+
+  isUnlocked = false;
+};

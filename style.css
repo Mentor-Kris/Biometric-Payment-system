@@ -603,12 +603,28 @@ nav a {
 
 .promo button {
   margin-top: 20px;
-  padding: 12px 25px;
+  padding: 14px 28px;
   border-radius: 30px;
-  background: #2563eb;
+
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
   color: white;
+
   border: none;
   cursor: pointer;
+
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  transition: all 0.3s ease;
+}
+
+.promo button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 25px rgba(37,99,235,0.4);
+}
+
+.promo button:active {
+  transform: scale(0.95);
 }
 
 /* ================= POPUP ================= */
@@ -618,8 +634,13 @@ nav a {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.5);
+  animation: fadeIn 0.3s ease;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 .popup-box {
   background: white;
   width: 320px;
@@ -647,6 +668,7 @@ nav a {
   border-radius: 50%;
   background: radial-gradient(circle,#2563eb,#1e40af);
   animation: pulse 1.2s infinite;
+   box-shadow: 0 0 20px rgba(37,99,235,0.6);
 }
 
 @keyframes pulse {
@@ -664,4 +686,200 @@ nav a {
   .actions {
     flex-direction: column;
   }
+}
+/* ===== PREMIUM CARD EFFECT ===== */
+.action {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.action:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 15px 40px rgba(37,99,235,0.25);
+}
+
+.active-card {
+  border: 2px solid #2563eb;
+  background: white;
+  box-shadow: 0 15px 40px rgba(37,99,235,0.3);
+}
+/* ===== ICON IMPROVEMENT ===== */
+.action i {
+  font-size: 30px;
+  color: #2563eb;
+  transition: 0.3s;
+}
+
+.action:hover i {
+  transform: scale(1.2);
+}
+#balance {
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  transition: 0.3s ease;
+}
+/* CARD FIX */
+.balance-card {
+    backdrop-filter: blur(10px);
+  background: linear-gradient(135deg,#1e3a8a,#2563eb);
+  padding: 18px 22px;   /* 🔥 reduced */
+  border-radius: 20px;
+  color: white;
+}
+/* BALANCE TEXT */
+#balance {
+  font-size: 26px;      /* smaller */
+  margin-top: 6px;
+}
+/* TOP */
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balance-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(37,99,235,0.3);
+}
+
+.balance-title {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.balance-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* BALANCE */
+#balance {
+  font-size: 26px;      /* smaller */
+  margin-top: 6px;
+}
+
+/* INFO SECTION */
+.balance-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;     /* reduced */
+}
+/* TEXT SIZE */
+.info-box p {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.info-box p {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.info-box h4 {
+  margin-top: 5px;
+}
+
+/* PROGRESS BAR */
+.progress-bar {
+  margin-top: 10px;
+  height: 4px;          /* thinner */
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+}
+
+.progress-fill {
+  width: 65%;
+  height: 100%;
+  background: white;
+}
+
+@keyframes fillAnim {
+  from { width: 0; }
+  to { width: 65%; }
+}
+.eye {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* FULL SCREEN DARK OVERLAY */
+.pin-popup {
+  display: none;          /* keep hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+}
+/* POPUP BOX */
+.pin-box {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 300px;
+
+  text-align: center;
+
+  animation: scaleIn 0.3s ease;
+}
+
+/* ANIMATION */
+@keyframes scaleIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* TITLE */
+.pin-box h2 {
+  margin-bottom: 15px;
+}
+
+/* INPUT */
+.pin-box input {
+  width: 100%;
+  padding: 12px;
+  font-size: 20px;
+
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+
+  letter-spacing: 6px;
+}
+
+/* BUTTON */
+.pin-box button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+
+  border-radius: 25px;
+  border: none;
+
+  background: linear-gradient(135deg,#2563eb,#3b82f6);
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pin-box button:hover {
+  transform: scale(1.05);
+}
+
+.pin-box button:active {
+  transform: scale(0.95);
 }

@@ -5,7 +5,7 @@
 <title>Bio-Pay</title>
 
 <link rel="stylesheet" href="style.css">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
 </head>
 
 <body>
@@ -48,18 +48,44 @@
 <section class="grid">
 
   <!-- BALANCE CARD -->
- <div class="balance">
-  <p>AVAILABLE LIQUIDITY</p>
+<div class="balance-card">
 
-  <div class="balance-row">
-    <h1 id="balance">••••••</h1>
-    <i class="ri-eye-line eye" onclick="openBiometric()"></i>
+  <div class="top-row">
+    <p class="balance-title">Available Balance</p>
+    <i class="ri-eye-off-line eye" onclick="toggleBalancePin()"></i>
   </div>
 
-  <div class="balance-bottom">
-    <span class="tag">Encrypted via Bio-Signature</span>
-    <small>BIOMETRIC AUTH REQUIRED</small>
+  <h1 id="balance">₹ 12,500</h1>
+
+  <!-- NEW SECTION (fills empty space) -->
+  <div class="balance-info">
+    <div class="info-box">
+      <p>Total Credit</p>
+      <h4 style="color:#22c55e;">+₹5,200</h4>
+    </div>
+
+    <div class="info-box">
+      <p>Total Debit</p>
+      <h4 style="color:#ef4444;">-₹2,700</h4>
+    </div>
   </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-bar">
+    <div class="progress-fill"></div>
+  </div>
+
+</div>
+ <div class="pin-popup" id="pinPopup">
+
+  <div class="pin-box">
+    <h3>Enter PIN</h3>
+
+    <input type="password" id="pinInput" maxlength="4" placeholder="••••">
+
+    <button onclick="checkPin()">Unlock</button>
+  </div>
+
 </div>
   <!-- BIO READY -->
   <div class="bio">
