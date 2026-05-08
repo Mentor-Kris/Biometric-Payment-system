@@ -90,7 +90,6 @@
   <!-- BIO READY -->
   <div class="bio">
     <div class="icon-box">
-      <i class="ri-fingerprint-line"></i>
     </div>
 
     <h3>Bio-Ready</h3>
@@ -109,10 +108,10 @@
     <p>Check Balance</p>
   </div>
 
-  <div class="action">
+<div class="action" onclick="openPayPopup()">
     <i class="ri-smartphone-line"></i>
     <p>Pay Mobile</p>
-  </div>
+</div>
 
   <div class="action">
     <i class="ri-qr-scan-2-line"></i>
@@ -127,46 +126,325 @@
 </section>
 
 <!-- ACTIVITY -->
+
 <section class="activity">
-  <h3>Activity Stream</h3>
 
-  <div class="txn">
-    <span>Apple Store</span>
-    <span class="red">-₹1,299</span>
+  <div class="activity-top">
+
+    <h3>Activity Stream</h3>
+
+    <button onclick="clearHistory()">
+      Clear History
+    </button>
+
   </div>
 
-  <div class="txn">
-    <span>Received from James</span>
-    <span class="green">+₹450</span>
+  <div id="activityList">
+
+    <!-- dynamic payments here -->
+
   </div>
+
 </section>
 
 <!-- PROMO -->
 <section class="promo">
-  <div>
-    <h1>Instant settlements.<br>Infinite security.</h1>
-    <p>Secure biometric payments for future.</p>
-    <button>EXPAND MY NETWORK</button>
+
+  <!-- LEFT -->
+  <div class="promo-left">
+
+    <span class="reward-tag">
+      REFERRAL REWARD
+    </span>
+
+    <h1>
+      Instant settlements.<br>
+      Infinite security.
+    </h1>
+
+    <p>
+      Invite your network to the future of identity-based finance.
+      Send capital across borders with nothing but your bio-signature.
+    </p>
+
+    <button>
+      EXPAND MY NETWORK
+    </button>
+
   </div>
-</section>
 
-<!-- BIOMETRIC POPUP -->
-<div id="bio-popup" class="popup">
-  <div class="popup-box">
+  <!-- RIGHT -->
+  <div class="promo-right">
 
-    <div class="fingerprint-ring">
-      <div class="fingerprint"></div>
+    <div class="floating secured">
+      Secured?
     </div>
 
-    <h2>Biometric Scan</h2>
-    <p>Place your finger to decrypt your balance</p>
+    <div class="dot left-dot"></div>
 
-    <button onclick="authenticate()">AUTHENTICATE</button>
-    <span onclick="closePopup()">Cancel Request</span>
+    <!-- PHONE -->
+    <div class="phone">
+
+      <div class="phone-screen">
+        <i class="ri-check-line"></i>
+      </div>
+
+    </div>
+
+    <div class="floating instant">
+      Instantly.
+    </div>
+
+    <div class="dot right-dot"></div>
 
   </div>
+
+</section>
+<!-- PAY MOBILE POPUP -->
+
+<div id="payPopup" class="pay-popup">
+
+  <div class="pay-box">
+
+    <div class="pay-top">
+      <h2>Pay Mobile</h2>
+      <i class="ri-close-line" onclick="closePayPopup()"></i>
+    </div>
+    <input type="text"
+    <input
+type="text"
+id="nameInput"
+placeholder="Enter Receiver Name">
+    <!-- MOBILE -->
+    <input 
+      type="text" 
+      id="mobileInput"
+      placeholder="Enter Mobile Number"
+    >
+
+    <!-- AMOUNT -->
+    <input 
+      type="number" 
+      id="amountInput"
+      placeholder="Enter Amount"
+    >
+
+    <!-- MESSAGE -->
+    <textarea 
+      id="messageInput"
+      placeholder="Message (Optional)"
+    ></textarea>
+
+    <!-- ERROR -->
+    <p id="paymentError" style="color:red; display:none; margin-bottom:15px;">
+      Please fill all required fields
+    </p>
+
+  <button type="button" onclick="sendPayment()">
+  Proceed Payment
+</button>
+
+  </div>
+
 </div>
 
+<!-- MODERN BIOMETRIC POPUP -->
+
+<div id="bio-popup" class="popup">
+
+  <div class="popup-box">
+
+    <h2>Biometric Verification</h2>
+
+<p>
+  Verify fingerprint to complete secure
+  Bio-Pay transaction
+</p>
+
+    <!-- SCAN -->
+
+    <div class="scan-area">
+
+    <div class="scan-ring"></div>
+
+    <div class="scan-core">
+
+        <div class="scan-wave"></div>
+
+        <i class="ri-fingerprint-line fingerprint"></i>
+
+    </div>
+
+</div>
+
+    <div class="scan-status">
+      Capturing Fingerprint...
+    </div>
+
+    <div class="scan-note">
+      Please place your finger on the sensor
+    </div>
+
+    <!-- BUTTONS -->
+
+    <div class="popup-actions">
+
+      <button class="cancel-btn"
+      onclick="closePopup()">
+        CANCEL
+      </button>
+
+      <button class="auth-btn"
+      onclick="authenticate()">
+        AUTHENTICATE
+      </button>
+
+    </div>
+
+    <div class="popup-footer">
+      <i class="ri-shield-check-line"></i>
+      Secured by Bio-Pay Encryption
+    </div>
+
+  </div>
+
+</div>
+
+<!-- PREMIUM RECEIPT -->
+
+<div id="receiptPopup" class="receipt-popup">
+
+  <div class="receipt-box">
+
+    <!-- CONFETTI -->
+    <div class="confetti conf1"></div>
+    <div class="confetti conf2"></div>
+    <div class="confetti conf3"></div>
+    <div class="confetti conf4"></div>
+    <div class="confetti conf5"></div>
+
+    <!-- SUCCESS -->
+    <div class="success-animation">
+
+      <div class="success-ring"></div>
+
+      <div class="success-circle">
+        <i class="ri-check-line"></i>
+      </div>
+
+    </div>
+
+    <h2>Payment Successful</h2>
+
+    <div class="success-badge">
+      <i class="ri-shield-check-line"></i>
+      Transaction Completed Successfully
+    </div>
+
+    <h1 id="receiptAmount">
+      ₹600
+    </h1>
+
+    <!-- USER -->
+
+    <div class="receiver-card">
+
+     <div class="receiver-avatar"
+id="receiverAvatar">
+  RS
+</div>
+
+      <div class="receiver-info">
+
+        <span>Paid to</span>
+
+        <h3 id="receiverName">
+          Rohit Sharma
+        </h3>
+
+        <p id="receiptUser">
+          9016186307
+        </p>
+
+      </div>
+
+      <div class="receiver-check">
+        <i class="ri-user-follow-line"></i>
+      </div>
+
+    </div>
+
+    <!-- DETAILS -->
+
+    <div class="receipt-details">
+
+      <div class="detail-column">
+
+        <div class="detail-item">
+          <span>Status</span>
+          <b class="green-text">Completed ●</b>
+        </div>
+
+        <div class="detail-item">
+          <span>Method</span>
+          <b>BioPay Fingerprint</b>
+        </div>
+
+        <div class="detail-item">
+          <span>Date</span>
+          <b id="receiptDate">8 May 2026</b>
+        </div>
+
+      </div>
+
+      <div class="detail-column">
+
+        <div class="detail-item">
+          <span>Time</span>
+          <b id="receiptTime">12:10 PM</b>
+        </div>
+
+        <div class="detail-item">
+          <span>Transaction ID</span>
+          <b id="transactionId">#BP625958</b>
+        </div>
+
+        <div class="detail-item">
+          <span>Ref. No.</span>
+          <b id="referenceNumber">8485959203</b>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BUTTONS -->
+
+    <div class="receipt-buttons">
+
+      <button class="share-btn"
+      onclick="shareWhatsApp()">
+
+        <i class="ri-whatsapp-line"></i>
+
+        Share Receipt
+
+      </button>
+
+      <button class="done-btn"
+      onclick="closeReceipt()">
+
+        Done
+
+        <i class="ri-arrow-right-s-line"></i>
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 <script src="script.js"></script>
 </body>
 </html>
