@@ -306,6 +306,7 @@ initials;
 
   document.getElementById("receiptPopup").style.display =
   "flex";
+  addToHistory();
 }
 
 
@@ -445,4 +446,155 @@ function deleteHistory(button){
 function clearHistory(){
 
   document.getElementById("activityList").innerHTML = "";
+}
+function addToHistory(){
+
+  const activity =
+  document.getElementById("activityList");
+
+  let initials =
+  currentName
+  .split(" ")
+  .map(word => word[0])
+  .join("")
+  .toUpperCase();
+
+  const now = new Date();
+
+  const time =
+  now.toLocaleTimeString("en-IN",{
+    hour:"2-digit",
+    minute:"2-digit"
+  });
+
+  // save receipt data
+
+  const item =
+  document.createElement("div");
+
+  item.className =
+  "activity-item";
+
+  // save custom data
+
+  item.setAttribute("data-name", currentName);
+
+  item.setAttribute("data-mobile", currentMobile);
+
+  item.setAttribute("data-amount", currentAmount);
+
+  item.setAttribute(
+    "data-time",
+    document.getElementById("receiptTime").innerText
+  );
+
+  item.setAttribute(
+    "data-date",
+    document.getElementById("receiptDate").innerText
+  );
+
+  item.setAttribute(
+    "data-transaction",
+    document.getElementById("transactionId").innerText
+  );
+
+  item.innerHTML = `
+
+    <div class="activity-left">
+
+      <div class="activity-avatar">
+        ${initials}
+      </div>
+
+      <div class="activity-info">
+
+        <h4>${currentName}</h4>
+
+        <p>${currentMobile} • ${time}</p>
+
+      </div>
+
+    </div>
+
+    <div class="activity-amount">
+
+      <h3>-₹${currentAmount}</h3>
+
+      <button class="view-btn"
+      onclick="viewReceipt(this)">
+        View
+      </button>
+
+      <button class="delete-btn"
+      onclick="deleteHistory(this)">
+        Delete
+      </button>
+
+    </div>
+
+  `;
+
+  activity.prepend(item);
+}
+function viewReceipt(button){
+
+  const item =
+  button.closest(".activity-item");
+
+  // get saved data
+
+  const name =
+  item.getAttribute("data-name");
+
+  const mobile =
+  item.getAttribute("data-mobile");
+
+  const amount =
+  item.getAttribute("data-amount");
+
+  const date =
+  item.getAttribute("data-date");
+
+  const time =
+  item.getAttribute("data-time");
+
+  const transaction =
+  item.getAttribute("data-transaction");
+
+  // initials
+
+  let initials =
+  name
+  .split(" ")
+  .map(word => word[0])
+  .join("")
+  .toUpperCase();
+
+  // update receipt
+
+  document.getElementById("receiptAmount").innerText =
+  "₹" + amount;
+
+  document.getElementById("receiverName").innerText =
+  name;
+
+  document.getElementById("receiptUser").innerText =
+  mobile;
+
+  document.getElementById("receiptDate").innerText =
+  date;
+
+  document.getElementById("receiptTime").innerText =
+  time;
+
+  document.getElementById("transactionId").innerText =
+  transaction;
+
+  document.getElementById("receiverAvatar").innerText =
+  initials;
+
+  // show popup
+
+  document.getElementById("receiptPopup").style.display =
+  "flex";
 }

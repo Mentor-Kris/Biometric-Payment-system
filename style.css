@@ -2629,3 +2629,27 @@ ACTIVITY
         opacity:1;
     }
 }
+/* view button */
+
+.view-btn{
+
+    margin-top:8px;
+
+    margin-right:8px;
+
+    border:none;
+
+    background:#dbeafe;
+
+    color:#2563eb;
+
+    padding:7px 12px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    font-weight:600;
+}
