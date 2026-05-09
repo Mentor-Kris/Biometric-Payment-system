@@ -91,22 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 let balanceVisible = false;
 
-function toggleBalance() {
-  const balance = document.getElementById("balance");
-  const eye = document.querySelector(".eye");
-
-  if (!balanceVisible) {
-    // show real balance
-    balance.innerText = balance.getAttribute("data-real");
-    eye.className = "ri-eye-off-line eye";
-    balanceVisible = true;
-  } else {
-    // show PIN dots
-    balance.innerText = "● ● ● ● ● ●";
-    eye.className = "ri-eye-line eye";
-    balanceVisible = false;
-  }
-}
 // ===============================
 // OPEN PIN POPUP
 // ===============================
@@ -124,23 +108,6 @@ function toggleBalancePin() {
     openPinPopup();
   } else {
     hideBalancePin();
-  }
-}
-
-function checkPin() {
-  const pin = document.getElementById("pinInput").value;
-  const balance = document.getElementById("balance");
-  const eye = document.querySelector(".eye");
-
-  if (pin === "1234") {
-    balance.innerText = "₹12,500";
-    eye.className = "ri-eye-off-line eye";
-
-    isUnlocked = true;
-
-    document.getElementById("pinPopup").style.display = "none";
-  } else {
-    alert("Wrong PIN ❌");
   }
 }
 
@@ -269,31 +236,30 @@ if(window.checkingBalance){
 
   return;
 }
-  // =====================
-// BALANCE MODE
-// =====================
-
-if(window.balanceMode){
+ if(window.balanceMode){
 
   document.getElementById("bio-popup").style.display =
   "none";
 
-  const balance =
+  const balanceText =
   document.getElementById("balance");
 
   const eye =
   document.querySelector(".eye");
 
-  balance.innerText = "₹12,500";
+  // SHOW BALANCE
+
+  balanceText.innerText =
+  "₹" + balance.toLocaleString();
 
   eye.className =
   "ri-eye-off-line eye";
 
-  // auto hide after 8 sec
+  // AUTO HIDE
 
   setTimeout(() => {
 
-    balance.innerText =
+    balanceText.innerText =
     "● ● ● ● ● ●";
 
     eye.className =
@@ -358,6 +324,7 @@ initials;
 
   document.getElementById("receiptPopup").style.display =
   "flex";
+  sendMoney(Number(currentAmount));
   addToHistory();
 }
 
@@ -487,12 +454,44 @@ function addToHistory(){
 
 function deleteHistory(button){
 
-  button
-  .parentElement
-  .parentElement
-  .remove();
-}
+  const item =
+  button.closest(".activity-item");
 
+  // GET AMOUNT
+
+  const amountText =
+  item.querySelector("h3").innerText;
+
+  // REMOVE -₹
+
+  const amount =
+  Number(
+    amountText
+    .replace("-₹","")
+    .replace(",","")
+  );
+
+  // REMOVE FROM DEBIT
+
+  totalDebit -= amount;
+
+  if(totalDebit < 0){
+
+    totalDebit = 0;
+  }
+
+  // RETURN MONEY TO BALANCE
+
+  balance += amount;
+
+  // UPDATE UI
+
+  updateBalanceUI();
+
+  // REMOVE HISTORY
+
+  item.remove();
+}
 /* clear all */
 
 function clearHistory(){
@@ -694,7 +693,7 @@ function openBalanceBiometric(){
 
   // IF ALREADY VISIBLE -> HIDE
 
-  if(balance.innerText === "₹12,500"){
+  if(balance.innerText !== "● ● ● ● ● ●"){
 
     balance.innerText =
     "● ● ● ● ● ●";
@@ -703,6 +702,7 @@ function openBalanceBiometric(){
     "ri-eye-line eye";
 
     return;
+    updateBalanceUI();
   }
 
   // OTHERWISE OPEN BIOMETRIC
@@ -1347,4 +1347,63 @@ function uploadQRLogo(event){
   };
 
   reader.readAsDataURL(file);
+}
+/* BALANCE SYSTEM */
+
+let balance = 0;
+
+let totalCredit = 0;
+
+let totalDebit = 0;
+
+/* UPDATE UI */
+
+function updateBalanceUI(){
+
+document.getElementById(
+"balance"
+).innerText =
+"₹" + balance.toLocaleString();
+
+document.getElementById(
+"creditAmount"
+).innerText =
+"+₹" + totalCredit.toLocaleString();
+
+document.getElementById(
+"debitAmount"
+).innerText =
+"-₹" + totalDebit.toLocaleString();
+}
+
+/* RECEIVE PAYMENT */
+
+function receiveMoney(amount){
+
+balance += amount;
+
+totalCredit += amount;
+
+updateBalanceUI();
+}
+
+/* SEND PAYMENT */
+
+function sendMoney(amount){
+
+balance -= amount;
+
+totalDebit += amount;
+
+updateBalanceUI();
+}
+function openSettings(){
+
+alert("Settings Opening...");
+
+}
+function openSettings(){
+
+  alert("Opening Settings & Devices");
+
 }
