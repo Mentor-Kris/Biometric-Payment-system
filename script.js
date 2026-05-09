@@ -253,6 +253,58 @@ function sendPayment(){
 // AUTHENTICATE PAYMENT
 
 function authenticate(){
+  // =========================
+// CHECK BALANCE SCAN
+// =========================
+
+if(window.checkingBalance){
+
+  document.getElementById("bio-popup").style.display =
+  "none";
+
+  document.getElementById("balancePopup").style.display =
+  "flex";
+
+  window.checkingBalance = false;
+
+  return;
+}
+  // =====================
+// BALANCE MODE
+// =====================
+
+if(window.balanceMode){
+
+  document.getElementById("bio-popup").style.display =
+  "none";
+
+  const balance =
+  document.getElementById("balance");
+
+  const eye =
+  document.querySelector(".eye");
+
+  balance.innerText = "₹12,500";
+
+  eye.className =
+  "ri-eye-off-line eye";
+
+  // auto hide after 8 sec
+
+  setTimeout(() => {
+
+    balance.innerText =
+    "● ● ● ● ● ●";
+
+    eye.className =
+    "ri-eye-line eye";
+
+  }, 8000);
+
+  window.balanceMode = false;
+
+  return;
+}
 
   document.getElementById("bio-popup").style.display =
   "none";
@@ -597,4 +649,702 @@ function viewReceipt(button){
 
   document.getElementById("receiptPopup").style.display =
   "flex";
+}
+// OPEN BALANCE
+
+function openBalancePopup(){
+
+  document.getElementById("balancePopup").style.display =
+  "flex";
+}
+
+// CLOSE BALANCE
+
+function closeBalancePopup(){
+
+  document.getElementById("balancePopup").style.display =
+  "none";
+}
+// =========================
+// CHECK BALANCE POPUP
+// =========================
+
+function openBalancePopup(){
+
+  // open biometric first
+
+  window.checkingBalance = true;
+
+  document.getElementById("bio-popup").style.display =
+  "flex";
+}
+
+function closeBalancePopup(){
+
+  document.getElementById("balancePopup").style.display =
+  "none";
+}
+function openBalanceBiometric(){
+
+  const balance =
+  document.getElementById("balance");
+
+  const eye =
+  document.querySelector(".eye");
+
+  // IF ALREADY VISIBLE -> HIDE
+
+  if(balance.innerText === "₹12,500"){
+
+    balance.innerText =
+    "● ● ● ● ● ●";
+
+    eye.className =
+    "ri-eye-line eye";
+
+    return;
+  }
+
+  // OTHERWISE OPEN BIOMETRIC
+
+  window.balanceMode = true;
+
+  document.getElementById("bio-popup").style.display =
+  "flex";
+}
+// =========================
+// OPEN QR
+// =========================
+
+function openQRPopup(){
+document.getElementById("qrPopup").style.display = "flex";
+  // USER DATA
+
+  let username =
+  "Kris Bhanderi";
+
+  let upi =
+  "kris@biopay";
+
+  // INITIALS
+
+  let initials =
+  username
+  .split(" ")
+  .map(word => word[0])
+  .join("")
+  .toUpperCase();
+
+  // AVATAR
+
+  document.getElementById("qrAvatar").innerText =
+  initials;
+
+  // CENTER LOGO
+
+  document.getElementById("centerLogo").innerText =
+  username.charAt(0).toUpperCase();
+
+  // NAME
+
+  document.getElementById("qrName").innerText =
+  username;
+
+  // USERNAME
+
+  document.getElementById("qrUsername").innerText =
+  "@" + upi;
+
+  // UPI ID
+
+  document.getElementById("upiId").innerText =
+  upi;
+
+  // QR DATA
+
+  let qrData =
+  `upi://pay?pa=${upi}&pn=${username}`;
+
+  // REAL QR
+
+  const qrImage =
+document.getElementById("realQR");
+
+qrImage.src =
+"https://api.qrserver.com/v1/create-qr-code/?size=260x260&data="
++ encodeURIComponent(qrData);
+
+qrImage.onerror = function(){
+
+  this.src =
+  "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=BioPay";
+};
+}
+/* CLOSE POPUP */
+
+function closeQRPopup(){
+
+  document.getElementById("qrPopup").style.display =
+  "none";
+}
+
+// =========================
+// COPY UPI
+// =========================
+
+function copyUPI(){
+
+  let text =
+  document.getElementById("upiId").innerText;
+
+  navigator.clipboard.writeText(text);
+
+  alert("UPI ID Copied");
+}
+
+// =========================
+// SHARE QR
+// =========================
+
+async function shareQR(){
+
+  const qrImage =
+  document.getElementById("realQR");
+
+  const response =
+  await fetch(qrImage.src);
+
+  const blob =
+  await response.blob();
+
+  const file =
+  new File(
+    [blob],
+    "BioPayQR.png",
+    { type:"image/png" }
+  );
+
+  // native share
+
+  if(navigator.canShare &&
+     navigator.canShare({ files:[file] })){
+
+    await navigator.share({
+
+      title:"Bio-Pay QR",
+
+      text:"Scan this QR to pay me",
+
+      files:[file]
+
+    });
+
+  }else{
+
+    alert(
+    "QR sharing works on mobile devices/browser."
+    );
+  }
+}
+/* =========================
+OPEN QR
+========================= */
+
+function openQRPopup(){
+
+  document.getElementById("qrPopup").style.display =
+  "flex";
+
+  // USER DATA
+
+  let username =
+  "Kris Bhanderi";
+
+  let upi =
+  "kris@biopay";
+
+  // INITIALS
+
+  let initials =
+  username
+  .split(" ")
+  .map(word => word[0])
+  .join("")
+  .toUpperCase();
+
+  // USER
+
+  document.getElementById("qrAvatar").innerText =
+  initials;
+
+  document.getElementById("centerLogo").innerText =
+  username.charAt(0).toUpperCase();
+
+  document.getElementById("qrName").innerText =
+  username;
+
+  document.getElementById("qrUsername").innerText =
+  "@" + upi;
+
+  document.getElementById("upiId").innerText =
+  upi;
+
+  // QR
+
+  let qrData =
+  `upi://pay?pa=${upi}&pn=${username}`;
+
+  document.getElementById("realQR").src =
+  "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data="
+  + encodeURIComponent(qrData);
+}
+
+/* =========================
+CLOSE
+========================= */
+
+function closeQRPopup(){
+
+  document.getElementById("qrPopup").style.display =
+  "none";
+}
+
+/* =========================
+COPY
+========================= */
+
+function copyUPI(){
+
+  let text =
+  document.getElementById("upiId").innerText;
+
+  navigator.clipboard.writeText(text);
+
+  alert("UPI ID Copied");
+}
+
+/* =========================
+CREATE QR CARD
+========================= */
+
+async function createQRCard(){
+
+  let username =
+  document.getElementById("qrName").innerText;
+
+  let upi =
+  document.getElementById("upiId").innerText;
+
+  let qr =
+  document.getElementById("realQR").src;
+
+  let initials =
+  username
+  .split(" ")
+  .map(word => word[0])
+  .join("")
+  .toUpperCase();
+
+  // CANVAS
+
+  const canvas =
+  document.createElement("canvas");
+
+  canvas.width = 800;
+  canvas.height = 980;
+
+  const ctx =
+  canvas.getContext("2d");
+
+  // BACKGROUND
+
+  ctx.fillStyle = "#ffffff";
+
+  ctx.fillRect(
+  0,
+  0,
+  800,
+  980
+  );
+
+  // USER LOGO
+
+  const gradient =
+  ctx.createLinearGradient(
+  0,
+  0,
+  200,
+  200
+  );
+
+  gradient.addColorStop(
+  0,
+  "#2563eb"
+  );
+
+  gradient.addColorStop(
+  1,
+  "#60a5fa"
+  );
+
+  ctx.beginPath();
+
+  ctx.fillStyle =
+  gradient;
+
+  ctx.arc(
+  400,
+  120,
+  80,
+  0,
+  Math.PI * 2
+  );
+
+  ctx.fill();
+
+  // INITIALS
+
+  ctx.fillStyle =
+  "white";
+
+  ctx.font =
+  "bold 60px Arial";
+
+  ctx.textAlign =
+  "center";
+
+  ctx.fillText(
+  initials,
+  400,
+  140
+  );
+
+  // NAME
+
+  ctx.fillStyle =
+  "#071a52";
+
+  ctx.font =
+  "bold 52px Arial";
+
+  ctx.fillText(
+  username,
+  400,
+  290
+  );
+
+  // UPI
+
+  ctx.fillStyle =
+  "#64748b";
+
+  ctx.font =
+  "36px Arial";
+
+  ctx.fillText(
+  "@" + upi,
+  400,
+  345
+  );
+
+  // QR BOX
+
+  ctx.fillStyle =
+  "#ffffff";
+
+  roundRect(
+  ctx,
+  180,
+  410,
+  440,
+  440,
+  30,
+  true
+  );
+
+  ctx.lineWidth = 4;
+
+  ctx.strokeStyle =
+  "#dbeafe";
+
+  ctx.stroke();
+
+  // QR IMAGE
+
+  const qrImg =
+  new Image();
+
+  qrImg.crossOrigin =
+  "anonymous";
+
+  qrImg.src = qr;
+
+  await new Promise(resolve=>{
+      qrImg.onload = resolve;
+  });
+
+  ctx.drawImage(
+  qrImg,
+  220,
+  450,
+  360,
+  360
+  );
+
+  // CENTER LOGO
+
+  ctx.beginPath();
+
+  ctx.fillStyle =
+  "white";
+
+  ctx.shadowColor =
+  "rgba(0,0,0,.15)";
+
+  ctx.shadowBlur = 20;
+
+  ctx.arc(
+  400,
+  630,
+  60,
+  0,
+  Math.PI * 2
+  );
+
+  ctx.fill();
+
+  ctx.shadowBlur = 0;
+
+  // CENTER LETTER
+
+  ctx.fillStyle =
+  "#2563eb";
+
+  ctx.font =
+  "bold 52px Arial";
+
+  ctx.fillText(
+  username.charAt(0).toUpperCase(),
+  400,
+  650
+  );
+/* BOTTOM TEXT */
+
+ctx.fillStyle =
+"#64748b";
+
+ctx.font =
+"32px Arial";
+
+ctx.textAlign =
+"center";
+
+ctx.fillText(
+"Scan to pay with any UPI app",
+400,
+930
+);
+return canvas;
+}
+/* =========================
+ROUND RECTANGLE
+========================= */
+
+function roundRect(
+ctx,
+x,
+y,
+width,
+height,
+radius,
+fill
+){
+
+  ctx.beginPath();
+
+  ctx.moveTo(x + radius, y);
+
+  ctx.lineTo(x + width - radius, y);
+
+  ctx.quadraticCurveTo(
+  x + width,
+  y,
+  x + width,
+  y + radius
+  );
+
+  ctx.lineTo(
+  x + width,
+  y + height - radius
+  );
+
+  ctx.quadraticCurveTo(
+  x + width,
+  y + height,
+  x + width - radius,
+  y + height
+  );
+
+  ctx.lineTo(
+  x + radius,
+  y + height
+  );
+
+  ctx.quadraticCurveTo(
+  x,
+  y + height,
+  x,
+  y + height - radius
+  );
+
+  ctx.lineTo(
+  x,
+  y + radius
+  );
+
+  ctx.quadraticCurveTo(
+  x,
+  y,
+  x + radius,
+  y
+  );
+
+  ctx.closePath();
+
+  if(fill){
+    ctx.fill();
+  }
+}
+
+/* =========================
+SHARE QR
+========================= */
+
+async function shareQR(){
+
+  const canvas =
+  await createQRCard();
+
+  canvas.toBlob(async function(blob){
+
+    const file =
+    new File(
+    [blob],
+    "BioPayQR.png",
+    {type:"image/png"}
+    );
+
+    await navigator.share({
+
+      title:"BioPay QR",
+
+      files:[file]
+
+    });
+
+  });
+}
+
+/* =========================
+DOWNLOAD QR
+========================= */
+
+async function downloadQR(){
+
+  const canvas =
+  await createQRCard();
+
+  const link =
+  document.createElement("a");
+
+  link.download =
+  "BioPayQR.png";
+
+  link.href =
+  canvas.toDataURL();
+
+  link.click();
+}
+/* =========================
+CUSTOMIZE QR
+========================= */
+
+function changeQRColor(){
+
+  let colors = [
+
+    "#2563eb",
+    "#16a34a",
+    "#9333ea",
+    "#f97316",
+    "#e11d48"
+
+  ];
+
+  let randomColor =
+  colors[Math.floor(
+  Math.random() * colors.length
+  )];
+
+  document.querySelector(
+  ".real-qr-box"
+  ).style.borderColor =
+  randomColor;
+
+  document.querySelector(
+  ".upi-user-logo"
+  ).style.background =
+  randomColor;
+}
+/* CUSTOM QR IMAGE */
+
+function uploadQRLogo(event){
+
+  const file =
+  event.target.files[0];
+
+  if(!file) return;
+
+  const reader =
+  new FileReader();
+
+  reader.onload = function(e){
+
+    // CENTER LOGO
+
+    const centerLogo =
+    document.querySelector(
+    ".qr-center-logo"
+    );
+
+    // REMOVE LETTER
+
+    centerLogo.innerHTML = "";
+
+    // CREATE IMAGE
+
+    const img =
+    document.createElement("img");
+
+    img.src =
+    e.target.result;
+
+    img.style.width =
+    "45px";
+
+    img.style.height =
+    "45px";
+
+    img.style.objectFit =
+    "cover";
+
+    img.style.borderRadius =
+    "50%";
+
+    // ADD IMAGE
+
+    centerLogo.appendChild(img);
+  };
+
+  reader.readAsDataURL(file);
 }

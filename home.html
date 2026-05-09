@@ -52,7 +52,8 @@
 
   <div class="top-row">
     <p class="balance-title">Available Balance</p>
-    <i class="ri-eye-off-line eye" onclick="toggleBalancePin()"></i>
+    <i class="ri-eye-off-line eye"
+onclick="openBalanceBiometric()"></i>
   </div>
 
   <h1 id="balance">₹ 12,500</h1>
@@ -103,10 +104,11 @@
 <!-- ACTION CARDS -->
 <section class="actions">
 
-  <div class="action active-card" onclick="openBiometric()">
+<div class="action active-card"
+onclick="openBalancePopup()">
     <i class="ri-bank-line"></i>
     <p>Check Balance</p>
-  </div>
+</div>
 
 <div class="action" onclick="openPayPopup()">
     <i class="ri-smartphone-line"></i>
@@ -118,13 +120,220 @@
     <p>Scan to Pay</p>
   </div>
 
-  <div class="action">
+  <div class="action"
+onclick="openQRPopup()">
+
     <i class="ri-qr-code-line"></i>
-    <p>Receive QR</p>
+
+    <p>My QR</p>
+
+</div>
+<!-- =========================
+MY QR POPUP
+========================= -->
+
+<div id="qrPopup">
+
+  <div class="myqr-box">
+
+    <!-- TOP -->
+
+    <div class="myqr-top">
+
+      <h2>My QR</h2>
+
+      <i class="ri-close-line"
+      onclick="closeQRPopup()"></i>
+
+    </div>
+
+    <p class="qr-subtitle">
+
+      Scan & Pay me securely
+
+    </p>
+
+    <!-- USER -->
+
+    <div class="qr-user-top">
+
+      <!-- USER LOGO -->
+
+      <div class="upi-user-logo"
+      id="qrAvatar">
+
+        KB
+
+      </div>
+
+      <!-- USER INFO -->
+
+      <div class="upi-user-info">
+
+        <h3 id="qrName">
+
+          Kris Bhanderi
+
+        </h3>
+
+        <p id="qrUsername">
+
+          @kris@biopay
+
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- QR CARD -->
+
+    <div class="real-qr-box">
+
+      <!-- REAL QR -->
+
+      <img
+      id="realQR"
+      alt="QR Code">
+
+      <!-- CENTER LOGO -->
+
+      <div class="qr-center-logo"
+      id="centerLogo">
+
+        K
+
+      </div>
+
+    </div>
+
+    <!-- CUSTOMIZE -->
+
+    <label class="custom-qr-btn">
+
+Customize QR
+
+<input
+type="file"
+accept="image/*"
+onchange="uploadQRLogo(event)"
+hidden>
+
+</label>
+
+    <!-- APPS -->
+<div class="upi-apps">
+
+  <div class="upi-app gpay">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg">
   </div>
 
-</section>
+  <div class="upi-app phonepe">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg">
+  </div>
 
+  <div class="upi-app paytm">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Paytm_logo.png">
+  </div>
+</div>
+
+    <!-- UPI CARD -->
+
+    <div class="upi-card">
+
+      <div>
+
+        <span>
+
+          UPI ID
+
+        </span>
+
+        <h4 id="upiId">
+
+          kris@biopay
+
+        </h4>
+
+      </div>
+
+      <button onclick="copyUPI()">
+
+        <i class="ri-file-copy-line"></i>
+
+        Copy
+
+      </button>
+
+    </div>
+
+    <!-- STATUS -->
+
+    <div class="qr-status">
+
+      <div>
+
+        <span>Status</span>
+
+        <b class="active-status">
+
+          Active
+
+        </b>
+
+      </div>
+
+      <div>
+
+        <span>Security</span>
+
+        <b class="secure-status">
+
+          Bio-Protected
+
+        </b>
+
+      </div>
+
+    </div>
+
+    <!-- BUTTONS -->
+
+    <div class="qr-buttons">
+
+      <button class="share-qr"
+      onclick="shareQR()">
+
+        <i class="ri-share-forward-line"></i>
+
+        Share QR
+
+      </button>
+
+      <button class="download-qr"
+      onclick="downloadQR()">
+
+        <i class="ri-download-line"></i>
+
+        Download QR
+
+      </button>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <p class="qr-footer">
+
+      Your payments are protected with Bio-Pay Security
+
+    </p>
+
+  </div>
+
+</div>
+
+</section>
 <!-- ACTIVITY -->
 
 <section class="activity">
@@ -210,7 +419,7 @@
       <h2>Pay Mobile</h2>
       <i class="ri-close-line" onclick="closePayPopup()"></i>
     </div>
-    <input type="text"
+
     <input
 type="text"
 id="nameInput"
@@ -260,7 +469,6 @@ placeholder="Enter Receiver Name">
   Verify fingerprint to complete secure
   Bio-Pay transaction
 </p>
-
     <!-- SCAN -->
 
     <div class="scan-area">
@@ -276,7 +484,6 @@ placeholder="Enter Receiver Name">
     </div>
 
 </div>
-
     <div class="scan-status">
       Capturing Fingerprint...
     </div>
@@ -305,6 +512,40 @@ placeholder="Enter Receiver Name">
       <i class="ri-shield-check-line"></i>
       Secured by Bio-Pay Encryption
     </div>
+
+  </div>
+
+</div>
+
+<!-- BALANCE POPUP -->
+
+<div id="balancePopup" class="balance-popup">
+
+  <div class="balance-box">
+
+    <div class="balance-animation">
+
+      <div class="balance-ring"></div>
+
+      <div class="balance-icon">
+        <i class="ri-wallet-3-line"></i>
+      </div>
+
+    </div>
+
+    <h2>Available Balance</h2>
+
+    <h1 id="popupBalance">
+      ₹12,500
+    </h1>
+
+    <p>
+      Your Bio-Pay wallet balance is secure
+    </p>
+
+    <button onclick="closeBalancePopup()">
+      Done
+    </button>
 
   </div>
 
