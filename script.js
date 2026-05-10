@@ -62,6 +62,10 @@ function checkOTP() {
 
   if (entered === real) {
     alert("Login Successful ✅");
+    localStorage.setItem(
+"userMobile",
+mobile
+);
     window.location.href = "home.html";
   } else {
     alert("Wrong OTP ❌");
@@ -1487,3 +1491,78 @@ document.body.classList.toggle(
 );
 
 }
+/* =================================
+   PROFILE PAGE
+================================= */
+
+function openProfilePage(){
+
+document.getElementById(
+"profilePage"
+).style.display = "flex";
+
+}
+
+/* =================================
+   SECURITY PAGE
+================================= */
+
+function openSecurityPage(){
+
+document.getElementById(
+"securityPage"
+).style.display = "flex";
+
+}
+
+/* =================================
+   ALERT PAGE
+================================= */
+
+function openAlertsPage(){
+
+document.getElementById(
+"alertsPage"
+).style.display = "flex";
+
+}
+
+/* =================================
+   CLOSE PAGE
+================================= */
+
+function closePage(id){
+
+document.getElementById(id)
+.style.display = "none";
+
+}
+/* =========================
+   PROFILE USER DATA
+========================= */
+
+window.addEventListener(
+"load",
+function(){
+
+const savedMobile =
+localStorage.getItem(
+"userMobile"
+);
+
+if(savedMobile){
+
+const mobileText =
+document.getElementById(
+"profileMobile"
+);
+
+if(mobileText){
+
+mobileText.innerText =
+savedMobile;
+}
+
+}
+
+});

@@ -743,44 +743,50 @@ id="receiverAvatar">
 
     <!-- SETTINGS LIST -->
 
-    <div class="settings-list">
+    <div class="settings-item"
+onclick="openProfilePage()">
 
-      <div class="settings-item">
+    <div class="settings-left">
 
-        <div class="settings-left">
+        <i class="ri-user-3-line"></i>
 
-          <i class="ri-user-3-line"></i>
+        <span>Your Profile</span>
 
-          <span>Your Profile</span>
+    </div>
 
-        </div>
+    <i class="ri-arrow-right-s-line"></i>
 
-      </div>
+</div>
 
-      <div class="settings-item">
+     <div class="settings-item"
+onclick="openSecurityPage()">
 
-        <div class="settings-left">
+    <div class="settings-left">
 
-          <i class="ri-shield-check-line"></i>
+        <i class="ri-shield-check-line"></i>
 
-          <span>Security Center</span>
+        <span>Security Center</span>
 
-        </div>
+    </div>
 
-      </div>
+    <i class="ri-arrow-right-s-line"></i>
 
-      <div class="settings-item">
+</div>
 
-        <div class="settings-left">
+  <div class="settings-item"
+onclick="openAlertsPage()">
 
-          <i class="ri-notification-3-line"></i>
+    <div class="settings-left">
 
-          <span>Payment Alerts</span>
+        <i class="ri-notification-3-line"></i>
 
-        </div>
+        <span>Payment Alerts</span>
 
-      </div>
+    </div>
 
+    <i class="ri-arrow-right-s-line"></i>
+
+</div>
       <!-- DARK MODE -->
 
       <div class="settings-item">
@@ -834,6 +840,202 @@ id="receiverAvatar">
     </div>
 
   </div>
+
+</div>
+<!-- PROFILE PAGE -->
+
+<div class="settings-popup"
+id="profilePage">
+
+<div class="settings-box">
+
+<div class="settings-header">
+
+<div class="settings-back"
+onclick="closePage('profilePage')">
+
+<i class="ri-arrow-left-line"></i>
+
+</div>
+
+<h2>Your Profile</h2>
+
+</div>
+
+<div class="profile-setting">
+
+<div class="profile-avatar">
+
+KB
+
+</div>
+
+<div class="profile-info">
+
+<h3>Kris Bhanderi</h3>
+
+<p>@biopay.user</p>
+
+</div>
+
+</div>
+
+<div class="settings-list">
+
+<div class="settings-item">
+
+<div class="settings-left">
+
+<i class="ri-phone-line"></i>
+<span id="profileMobile">
+Not Added
+</span>
+</div>
+
+</div>
+
+
+<div class="settings-item">
+
+<div class="settings-left">
+
+<i class="ri-map-pin-line"></i>
+
+<span>India</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<!-- SECURITY PAGE -->
+
+<div class="settings-popup"
+id="securityPage">
+
+<div class="settings-box">
+
+<div class="settings-header">
+
+<div class="settings-back"
+onclick="closePage('securityPage')">
+
+<i class="ri-arrow-left-line"></i>
+
+</div>
+
+<h2>Security Center</h2>
+
+</div>
+
+<div class="settings-list">
+
+<div class="settings-item">
+
+<div class="settings-left">
+
+<i class="ri-fingerprint-line"></i>
+
+<span>Biometric Active</span>
+
+</div>
+
+</div>
+
+<div class="settings-item">
+
+<div class="settings-left">
+
+<i class="ri-smartphone-line"></i>
+
+<span>1 Trusted Device</span>
+
+</div>
+
+</div>
+
+<div class="settings-item">
+
+<div class="settings-left">
+
+<i class="ri-shield-keyhole-line"></i>
+
+<span>End-to-End Encryption</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<!-- ALERTS PAGE -->
+
+<div class="settings-popup"
+id="alertsPage">
+
+<div class="settings-box">
+
+<div class="settings-header">
+
+<div class="settings-back"
+onclick="closePage('alertsPage')">
+
+<i class="ri-arrow-left-line"></i>
+
+</div>
+
+<h2>Payment Alerts</h2>
+
+</div>
+
+<div class="settings-list">
+
+<div class="settings-item">
+
+<div class="settings-left">
+
+<i class="ri-checkbox-circle-fill"></i>
+
+<span>Money Received Alerts</span>
+
+</div>
+
+</div>
+
+<div class="settings-item">
+
+<div class="settings-left">
+
+<i class="ri-checkbox-circle-fill"></i>
+
+<span>Payment Success Alerts</span>
+
+</div>
+
+</div>
+
+<div class="settings-item">
+
+<div class="settings-left">
+
+<i class="ri-checkbox-circle-fill"></i>
+
+<span>Security Login Alerts</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 <script src="script.js"></script>

@@ -4314,3 +4314,83 @@ padding:22px;
 }
 
 }
+/* VERIFIED BOX */
+
+.verified-box{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+background:#e8f5e9;
+
+color:#16a34a;
+
+padding:14px 18px;
+
+border-radius:16px;
+
+margin:22px 0;
+
+font-weight:600;
+}
+
+.verified-box i{
+
+font-size:20px;
+}
+
+/* PROFILE CARDS */
+
+.profile-detail-card{
+
+display:flex;
+
+align-items:center;
+
+gap:18px;
+
+background:white;
+
+padding:18px;
+
+border-radius:18px;
+
+margin-bottom:18px;
+
+transition:.3s;
+}
+
+.profile-detail-card:hover{
+
+transform:translateY(-2px);
+}
+
+.profile-detail-card i{
+
+font-size:26px;
+
+color:#2563eb;
+}
+
+.profile-detail-card small{
+
+display:block;
+
+font-size:13px;
+
+color:#6b7280;
+
+margin-bottom:4px;
+}
+
+.profile-detail-card h4{
+
+font-size:18px;
+
+font-weight:600;
+
+color:#111827;
+}
