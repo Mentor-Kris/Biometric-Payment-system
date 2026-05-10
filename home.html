@@ -103,7 +103,7 @@ onclick="openBalanceBiometric()"></i>
       Execute borderless payments with a single biometric touch.
     </p>
 
-    <button onclick="openSettings()">
+    <button onclick="openSettingsPopup()">
 
       <i class="ri-settings-3-line"></i>
 
@@ -112,7 +112,6 @@ onclick="openBalanceBiometric()"></i>
     </button>
 
 </div>
-    <p>Execute borderless payments with a single biometric touch.</p>
 
   </div>
 
@@ -697,6 +696,140 @@ id="receiverAvatar">
         <i class="ri-arrow-right-s-line"></i>
 
       </button>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- SETTINGS POPUP -->
+
+<div class="settings-popup" id="settingsPopup">
+
+  <div class="settings-box">
+
+    <!-- HEADER -->
+
+    <div class="settings-header">
+
+      <div class="settings-back"
+      onclick="closeSettingsPopup()">
+
+        <i class="ri-arrow-left-line"></i>
+
+      </div>
+
+      <h2>Bio-Pay Settings</h2>
+    </div>
+    <!-- PROFILE -->
+
+    <div class="profile-setting">
+
+      <div class="profile-avatar">
+
+        KB
+
+      </div>
+
+      <div class="profile-info">
+
+        <h3>Kris Bhanderi</h3>
+
+        <p>@kris@biopay</p>
+
+      </div>
+
+    </div>
+
+    <!-- SETTINGS LIST -->
+
+    <div class="settings-list">
+
+      <div class="settings-item">
+
+        <div class="settings-left">
+
+          <i class="ri-user-3-line"></i>
+
+          <span>Your Profile</span>
+
+        </div>
+
+      </div>
+
+      <div class="settings-item">
+
+        <div class="settings-left">
+
+          <i class="ri-shield-check-line"></i>
+
+          <span>Security Center</span>
+
+        </div>
+
+      </div>
+
+      <div class="settings-item">
+
+        <div class="settings-left">
+
+          <i class="ri-notification-3-line"></i>
+
+          <span>Payment Alerts</span>
+
+        </div>
+
+      </div>
+
+      <!-- DARK MODE -->
+
+      <div class="settings-item">
+
+        <div class="settings-left">
+
+          <i class="ri-moon-clear-line"></i>
+
+          <span>Dark Mode</span>
+
+        </div>
+
+        <label class="switch">
+
+          <input
+          type="checkbox"
+          onchange="toggleDarkMode()">
+
+          <span class="slider"></span>
+
+        </label>
+
+      </div>
+
+      <!-- BIOMETRIC -->
+
+      <div class="settings-item">
+
+        <div class="settings-left">
+
+          <i class="ri-fingerprint-line"></i>
+
+          <span>Biometric Lock</span>
+
+        </div>
+
+        <label class="switch">
+
+          <input
+          type="checkbox"
+          checked
+          id="biometricToggle"
+          onchange="toggleBiometric()">
+
+          <span class="slider"></span>
+
+        </label>
+
+      </div>
 
     </div>
 

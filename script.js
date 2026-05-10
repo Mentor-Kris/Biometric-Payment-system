@@ -1407,3 +1407,83 @@ function openSettings(){
   alert("Opening Settings & Devices");
 
 }
+function openSettingsPopup(){
+
+document.getElementById(
+"settingsPopup"
+).style.display = "flex";
+
+}
+
+function closeSettingsPopup(){
+
+document.getElementById(
+"settingsPopup"
+).style.display = "none";
+
+}
+/* SETTINGS POPUP */
+
+function openSettingsPopup(){
+
+document.getElementById(
+"settingsPopup"
+).style.display = "flex";
+
+}
+
+function closeSettingsPopup(){
+
+document.getElementById(
+"settingsPopup"
+).style.display = "none";
+
+}
+
+/* SETTINGS FUNCTIONS */
+
+function openProfileSettings(){
+
+alert("Opening Profile");
+
+}
+
+function openSecurity(){
+
+alert("Opening Security Center");
+
+}
+
+function openNotifications(){
+
+alert("Opening Payment Alerts");
+
+}
+
+function openAbout(){
+
+alert("Bio-Pay v1.0");
+
+}
+
+function openHelp(){
+
+alert("Opening Help & Support");
+
+}
+
+function signOut(){
+
+alert("Signing Out...");
+
+}
+
+/* DARK MODE */
+
+function toggleDarkMode(){
+
+document.body.classList.toggle(
+"dark-mode"
+);
+
+}
