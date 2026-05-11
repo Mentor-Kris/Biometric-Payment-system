@@ -62,7 +62,10 @@ function checkOTP() {
 
   if (entered === real) {
     alert("Login Successful ✅");
-    localStorage.setItem(
+    const mobile =
+localStorage.getItem("mobile");
+
+localStorage.setItem(
 "userMobile",
 mobile
 );
